@@ -14,7 +14,7 @@ homepage = "https://github.com/cmake-wheel/cmeel-texinfo"
 repository = "https://github.com/cmake-wheel/cmeel-texinfo.git"
 
 [tool.cmeel]
-build-number = 1
+build-number = 2
 py3-none = true
 run-tests = false
 
