@@ -1,30 +1,25 @@
 cmake_minimum_required(VERSION 3.20)
 
-set(PROJECT_NAME texinfo)
-set(PROJECT_VERSION 7.0.3)
+set(NAME texinfo)
+set(VERSION 7.0.3)
 
-project(cmeel-${PROJECT_NAME} VERSION ${PROJECT_VERSION})
+project(cmeel-${NAME} VERSION ${VERSION})
 
 execute_process(
-  COMMAND
-    "curl"
-    "https://ftp.gnu.org/gnu/${PROJECT_NAME}/${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
-    --output "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz" COMMAND_ERROR_IS_FATAL
-    ANY
+  COMMAND "curl" "https://ftp.gnu.org/gnu/${NAME}/${NAME}-${VERSION}.tar.xz"
+          --output "${NAME}-${VERSION}.tar.xz" COMMAND_ERROR_IS_FATAL ANY
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 execute_process(
-  COMMAND "tar" "xf" "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
-          COMMAND_ERROR_IS_FATAL ANY WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  COMMAND "tar" "xf" "${NAME}-${VERSION}.tar.xz" COMMAND_ERROR_IS_FATAL ANY
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 execute_process(
   COMMAND "./configure" "--prefix=${CMAKE_INSTALL_PREFIX}"
           COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
-execute_process(
-  COMMAND "make" COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
-execute_process(
-  COMMAND "make" "install" COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${NAME}-${VERSION}")
+execute_process(COMMAND "make" COMMAND_ERROR_IS_FATAL ANY
+                WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${NAME}-${VERSION}")
+execute_process(COMMAND "make" "install" COMMAND_ERROR_IS_FATAL ANY
+                WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${NAME}-${VERSION}")
 
 # dummy file for install target
-install(FILES README.md DESTINATION share/cmeel-${PROJECT_NAME}/)
+install(FILES README.md DESTINATION share/cmeel-${NAME}/)
