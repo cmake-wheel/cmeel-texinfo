@@ -6,20 +6,24 @@ set(PROJECT_VERSION 7.0.3)
 project(cmeel-${PROJECT_NAME} VERSION ${PROJECT_VERSION})
 
 execute_process(
-    COMMAND "curl" "https://ftp.gnu.org/gnu/${PROJECT_NAME}/${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz" --output
-    "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  COMMAND
+    "curl"
+    "https://ftp.gnu.org/gnu/${PROJECT_NAME}/${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
+    --output "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz" COMMAND_ERROR_IS_FATAL
+    ANY
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 execute_process(
-    COMMAND "tar" "xf" "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  COMMAND "tar" "xf" "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
+          COMMAND_ERROR_IS_FATAL ANY WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 execute_process(
   COMMAND "./configure" "--prefix=${CMAKE_INSTALL_PREFIX}"
+          COMMAND_ERROR_IS_FATAL ANY
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
 execute_process(
-  COMMAND "make"
+  COMMAND "make" COMMAND_ERROR_IS_FATAL ANY
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
 execute_process(
-  COMMAND "make" "install"
+  COMMAND "make" "install" COMMAND_ERROR_IS_FATAL ANY
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
 
 # dummy file for install target
