@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.20)
+
+set(PROJECT_NAME texinfo)
+set(PROJECT_VERSION 7.0.3)
+
+project(cmeel-${PROJECT_NAME} VERSION ${PROJECT_VERSION})
+
+execute_process(
+    COMMAND "curl" "https://ftp.gnu.org/gnu/${PROJECT_NAME}/${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz" --output
+    "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+execute_process(
+    COMMAND "tar" "xf" "${PROJECT_NAME}-${PROJECT_VERSION}.tar.xz"
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+execute_process(
+  COMMAND "./configure" "--prefix=${CMAKE_INSTALL_PREFIX}"
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
+execute_process(
+  COMMAND "make"
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
+execute_process(
+  COMMAND "make" "install"
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}")
+
+# dummy file for install target
+install(FILES README.md DESTINATION share/cmeel-${PROJECT_NAME}/)

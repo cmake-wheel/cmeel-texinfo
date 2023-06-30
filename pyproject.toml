@@ -1,0 +1,21 @@
+[build-system]
+build-backend = "cmeel.build"
+requires = ["cmeel[build]"]
+
+[project]
+description = "cmeel distribution for Texinfo"
+license = "LGPL-3.0-only"
+name = "cmeel-texinfo"
+requires-python = ">= 3.8"
+version = "7.0.3"
+
+[project.urls]
+homepage = "https://github.com/cmake-wheel/cmeel-texinfo"
+repository = "https://github.com/cmake-wheel/cmeel-texinfo.git"
+
+[tool.cmeel]
+py3-none = true
+run-tests = false
+
+[tool.tomlsort]
+all = true
