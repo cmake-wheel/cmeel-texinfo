@@ -15,7 +15,7 @@ repository = "https://github.com/cmake-wheel/cmeel-texinfo.git"
 
 [tool.cmeel]
 build-number = 3
-py3-none = true
+has-sitelib = false
 run-tests = false
 
 [tool.tomlsort]
