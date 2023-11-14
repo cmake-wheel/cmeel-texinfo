@@ -20,7 +20,7 @@ jobs:
           - image: "musllinux_1_1"
             arch: "aarch64"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: 'true'
       - uses: actions/setup-python@v4
@@ -42,7 +42,7 @@ jobs:
     #name: "macos"
     #runs-on: "macos-latest"
     #steps:
-      #- uses: actions/checkout@v3
+      #- uses: actions/checkout@v4
         #with:
           #submodules: 'true'
       #- uses: actions/setup-python@v4
@@ -58,7 +58,7 @@ jobs:
     needs: ["linux"]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
