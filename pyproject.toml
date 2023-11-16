@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "cmeel"
-requires = ["cmeel[build]"]
+requires = ["cmeel-gettext", "cmeel-help2man", "cmeel[build]"]
 
 [project]
 description = "cmeel distribution for Texinfo"

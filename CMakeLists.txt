@@ -5,21 +5,16 @@ set(VERSION 7.0.3)
 
 project(cmeel-${NAME} VERSION ${VERSION})
 
-execute_process(
-  COMMAND "curl" "https://ftp.gnu.org/gnu/${NAME}/${NAME}-${VERSION}.tar.xz"
-          --output "${NAME}-${VERSION}.tar.xz" COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-execute_process(
-  COMMAND "tar" "xf" "${NAME}-${VERSION}.tar.xz" COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-execute_process(
-  COMMAND "./configure" "--prefix=${CMAKE_INSTALL_PREFIX}"
-          COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${NAME}-${VERSION}")
-execute_process(COMMAND "make" COMMAND_ERROR_IS_FATAL ANY
-                WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${NAME}-${VERSION}")
-execute_process(COMMAND "make" "install" COMMAND_ERROR_IS_FATAL ANY
-                WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${NAME}-${VERSION}")
+include(ExternalProject)
+ExternalProject_Add(
+  ${NAME}
+  URL "https://ftp.gnu.org/gnu/${NAME}/${NAME}-${VERSION}.tar.xz"
+  URL_HASH "SHA1=356a623b88401d7c993408f33450c8104aad9df8"
+  DOWNLOAD_EXTRACT_TIMESTAMP OFF
+  BUILD_IN_SOURCE ON
+  CONFIGURE_COMMAND "./configure" "--prefix=${CMAKE_INSTALL_PREFIX}"
+  BUILD_COMMAND "make"
+  INSTALL_COMMAND "make" "install")
 
 # dummy file for install target
 install(FILES README.md DESTINATION share/cmeel-${NAME}/)
