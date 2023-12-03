@@ -12,6 +12,7 @@ version = "7.1"
 [project.urls]
 homepage = "https://github.com/cmake-wheel/cmeel-texinfo"
 repository = "https://github.com/cmake-wheel/cmeel-texinfo.git"
+upstream = "https://www.gnu.org/software/texinfo/"
 
 [tool.cmeel]
 has-sitelib = false
