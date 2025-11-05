@@ -25,7 +25,7 @@ jobs:
           - image: "musllinux_1_1"
             arch: "aarch64"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up QEMU
         if: matrix.arch == 'aarch64'
         uses: docker/setup-qemu-action@v3
@@ -41,7 +41,7 @@ jobs:
     name: "macos"
     runs-on: "macos-latest"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
@@ -54,7 +54,7 @@ jobs:
   sdist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v4
         with:
           python-version: 3.11
@@ -73,7 +73,7 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.ref_name }}
       - run: curl https://github.com/nim65s.gpg | gpg --import
